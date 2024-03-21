@@ -1,0 +1,28 @@
+<tr>
+    <th><%= user&.id %></th>
+    <td>
+        <%= user&.name%>
+    </td>
+    <td><%= user&.email %></td>
+    <td><span class="btn btn-pill <%=helper_bg_status(user)%>"> <%= I18n.t("enums.status.#{user&.status}") %></span></td>
+        <td><%=l user.created_at %></td>
+        <td class="table-action">
+            <%= link_to admin_user_path(user), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+            :'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+            <i class="fa-solid fa-eye"></i>
+
+            <% end %>
+            <%= link_to edit_admin_user_path(user), class: 'btn btn-warning rounded-pill',
+            :'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+            <i class="fa-solid fa-edit"></i>
+
+            <% end %>
+            <% if current_user.id != user.id %>
+
+            <%= link_to admin_user_path(user), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+            :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+            <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <% end %>
+        </td>
+    </tr>

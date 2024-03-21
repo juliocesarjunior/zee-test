@@ -1,0 +1,35 @@
+<%- model_class = User -%>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4"><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h6>
+                
+                <div class="row text-center">
+                    <div class="mb-3 col-12">
+                        <%= link_to t('.cancel', default: t("helpers.links.edit")),edit_admin_user_path(@user), class: 'btn btn-outline-primary' %>
+                        <%= link_to t('.cancel', default: t("helpers.links.back")),admin_users_path, class: 'btn btn-outline-primary' %>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-12 text-center profile">
+                        <img src="/assets/profile/user-1.jpg" width="150" height="150" alt="<%= @user&.name %>">
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:name) -%>: 
+                        <input class="string optional form-control" value="<%= @user.name %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:email) -%>: 
+                        <input class="string optional form-control" value="<%= @user.email %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-2">
+                        <%= model_class.human_attribute_name(:status) -%>: 
+                        <input class="string optional form-control" value="<%= I18n.t("enums.status.#{@user&.status}") %>" readonly disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

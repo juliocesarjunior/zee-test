@@ -1,0 +1,26 @@
+<tr>
+	<th><%= product&.id %></th>
+	<td>
+		<%= product&.name_display%>
+	</td>
+	<td><%= product&.description %></td>
+	<td><%= product&.manufacturer %></td>
+	<td><%= product&.active %></td>
+	<td><%=l product.created_at %></td>
+	<td class="table-action">
+		<%= link_to admin_product_path(product), class: 'btn btn-primary rounded-pill', data: { turbo: false },
+		:'data-tippy-content' => t('.show', default: t("helpers.links.show")) do %>
+		<i class="fa-solid fa-eye"></i>
+
+		<% end %>
+		<%= link_to edit_admin_product_path(product), class: 'btn btn-warning rounded-pill',
+		:'data-tippy-content' => t('.edit', default: t("helpers.links.edit")) do %>
+		<i class="fa-solid fa-edit"></i>
+
+		<% end %>
+		<%= link_to admin_product_path(product), method: :delete, class: 'btn btn-danger rounded-pill',
+		:'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
+		<i class="fa-solid fa-trash"></i>
+		<% end %>
+	</td>
+</tr>

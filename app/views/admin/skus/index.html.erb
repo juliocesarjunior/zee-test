@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Skus</h1>
+
+<div id="admin_skus">
+  <% @admin_skus.each do |admin_sku| %>
+    <%= render admin_sku %>
+    <p>
+      <%= link_to "Show this sku", admin_sku %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New sku", new_admin_sku_path %>

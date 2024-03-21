@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<html>
+<head>
+  <title>Zee Teste</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+</head>
+
+<body style="background-color: #f5f8fb;">
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+  <% if current_user.nil? %>
+      <%= yield %>
+  <% else %>
+  <!-- Sidebar Start -->
+  <%= render "layouts/includes/admin/sidebar" %>
+  <!--  Sidebar End -->
+  <div class="body-wrapper">
+    <!--  Header Start -->
+    <%= render "layouts/includes/admin/nav" %>
+    <!--  Header End -->
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </div>
+  <% end -%>
+</div>
+
+<%= javascript_include_tag "admin", "data-turbo-track": "reload", defer: true %>
+</body>
+</html>

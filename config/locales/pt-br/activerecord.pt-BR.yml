@@ -1,0 +1,27 @@
+pt-BR:
+  activerecord:
+    models:
+      user: Usuário
+      product: Produto
+      sku: SKU
+    attributes:
+      default_attributes: &default_attributes
+        description: Descrição
+        created_at: Cadastrado em
+        updated_at: Atualizado em
+
+      user:
+        <<: *default_attributes
+        password: Senha
+        password_confirmation: Confirmação de Senha
+
+      product:
+        <<: *default_attributes
+        name_internal: Nome Interno
+        name_display: Nome Exibição
+        manufacturer: Fabricante
+        active: Ativo
+      sku:
+        <<: *default_attributes
+        
+

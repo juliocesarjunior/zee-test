@@ -1,0 +1,46 @@
+<%- model_class = User -%>
+<div class="container-fluid p-0">
+    <div class="mb-3">
+        <h1 class="h3 d-inline align-middle"><%=I18n.t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+    </div>
+    <%= render 'search', url_search: admin_users_path %>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="datatables-reponsive_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 mb-3">
+                                <div class="dataTables_length" id="datatables-reponsive_length">
+                                    <%= link_to "Inserir", new_admin_user_path, class: "btn btn-success" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row dt-row">
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-bordered  text-center">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col"><%= model_class.human_attribute_name(:name) -%></th>
+                                            <th scope="col"><%= model_class.human_attribute_name(:email) -%></th>
+                                            <th scope="col"><%= model_class.human_attribute_name(:status) -%></th>
+                                            <th scope="col"><%= model_class.human_attribute_name(:created_at) %></th>
+                                            <th scope="col" class="text-center"><%=t '.actions', default: t("helpers.actions") %></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%= render @users %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <%= paginate @users %>
+                        <%= page_entries_info @users %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

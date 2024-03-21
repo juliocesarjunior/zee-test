@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @admin_sku %>
+
+<div>
+  <%= link_to "Edit this sku", edit_admin_sku_path(@admin_sku) %> |
+  <%= link_to "Back to skus", admin_skus_path %>
+
+  <%= button_to "Destroy this sku", @admin_sku, method: :delete %>
+</div>
