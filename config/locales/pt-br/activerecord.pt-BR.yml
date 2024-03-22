@@ -24,5 +24,8 @@ pt-BR:
         active: Exibir na vitrine?
       sku:
         <<: *default_attributes
-        
-
+        name: Nome
+        code: Código
+        stock: Estoque
+        price_table: Preço de Tabela
+        price_listing: Preço de Listagem
