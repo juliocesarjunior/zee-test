@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_160009) do
     t.bigint "product_id", null: false
     t.string "name"
     t.string "code"
-    t.text "stock"
+    t.integer "stock"
     t.string "price_table"
     t.string "price_listing"
     t.datetime "created_at", null: false

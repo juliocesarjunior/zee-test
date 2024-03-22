@@ -51,14 +51,15 @@ class Admin::ProductsController < AdminController
 
   # DELETE /admin/products/1 or /admin/products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_products_url, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
-    end
+   @product.skus.destroy_all
+   @product.destroy
+   respond_to do |format|
+    format.html { redirect_to admin_products_url, notice: "Product was successfully destroyed." }
+    format.json { head :no_content }
   end
+end
 
-  private
+private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])

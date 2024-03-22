@@ -4,7 +4,7 @@ class CreateSkus < ActiveRecord::Migration[7.0]
       t.references :product, null: false, foreign_key: true
       t.string :name
       t.string :code
-      t.text :stock
+      t.integer :stock
       t.string :price_table
       t.string :price_listing
       t.timestamps

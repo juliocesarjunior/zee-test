@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3 col-4">
                         <%= model_class.human_attribute_name(:active) -%>: 
-                        <input class="string optional form-control" value="<%= @product.active %>" readonly disabled>
+                        <input class="string optional form-control" value="<%= @product&.active==true ? 'Sim' : 'Não' %>" readonly disabled>
                     </div>
                     <div class="mb-3 col-12">
                         <%= model_class.human_attribute_name(:name_internal) -%>: 

@@ -19,7 +19,7 @@
             <% end %>
             <% if current_user.id != user.id %>
 
-            <%= link_to admin_user_path(user), method: :delete, data: { confirm: t("helpers.confirm") }, class: 'btn btn-danger rounded-pill',
+            <%= link_to admin_user_path(user), method: :delete, class: 'btn btn-danger rounded-pill',
             :'data-tippy-content' => t('.destroy', default: t("helpers.links.destroy")) do %>
             <i class="fa-solid fa-trash"></i>
             <% end %>

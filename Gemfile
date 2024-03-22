@@ -95,3 +95,4 @@ gem 'view_component'
 gem 'jwt', '2.7.1'
 # https://github.com/rails-api/active_model_serializers/tree/0-10-stable/docs
 gem 'active_model_serializers'
+gem "cocoon"

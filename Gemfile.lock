@@ -103,6 +103,7 @@ GEM
       ssrf_filter (~> 1.0)
     case_transform (0.2)
       activesupport
+    cocoon (1.2.15)
     concurrent-ruby (1.2.3)
     crass (1.0.6)
     date (3.3.4)
@@ -383,6 +384,7 @@ DEPENDENCIES
   brakeman
   capybara
   carrierwave (~> 3.0)
+  cocoon
   debug
   devise (~> 4.9)
   factory_bot_rails

@@ -5,7 +5,7 @@
 	</td>
 	<td><%= product&.description %></td>
 	<td><%= product&.manufacturer %></td>
-	<td><%= product&.active %></td>
+	<td><%= product&.active==true ? 'Sim' : 'Não' %></td>
 	<td><%=l product.created_at %></td>
 	<td class="table-action">
 		<%= link_to admin_product_path(product), class: 'btn btn-primary rounded-pill', data: { turbo: false },

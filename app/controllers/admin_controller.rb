@@ -1,4 +1,4 @@
-class AdminController < ActionController::Base
+class AdminController < ApplicationController
 
 	# DEVISE
 	before_action :authenticate_user!
@@ -17,5 +17,4 @@ class AdminController < ActionController::Base
 	def after_sign_in_path_for(resource)
 		admin_authenticated_root_path
 	end
-
 end

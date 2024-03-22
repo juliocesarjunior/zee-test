@@ -12,6 +12,7 @@ pt-BR:
 
       user:
         <<: *default_attributes
+        name: Nome
         password: Senha
         password_confirmation: Confirmação de Senha
 
@@ -20,7 +21,7 @@ pt-BR:
         name_internal: Nome Interno
         name_display: Nome Exibição
         manufacturer: Fabricante
-        active: Ativo
+        active: Exibir na vitrine?
       sku:
         <<: *default_attributes
         
