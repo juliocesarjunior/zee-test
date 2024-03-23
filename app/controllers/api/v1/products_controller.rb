@@ -1,9 +1,10 @@
 class Api::V1::ProductsController <  ApiController
+	#before_action :authorization_request, except: [:create]
 
 	before_action :set_product, only: [:show, :update, :destroy]
 
 	def index
-		@per_page = params[:per_page] || 22
+		@per_page = params[:per_page] || 25
 		@page = params[:page] || 1
 
 		@q = Product.order(created_at: :asc).ransack(params[:q])

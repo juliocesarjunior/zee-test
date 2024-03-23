@@ -1,8 +1,8 @@
 <%- model_class = Product -%>
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
-        <div class="col-sm-12 col-xl-12">
-            <div class="bg-light rounded h-100 p-4">
+        <div class="card col-sm-12 col-xl-12">
+            <div class="rounded h-100 p-4">
                 <h6 class="mb-4"><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h6>
                 
                 <div class="row text-center">
@@ -13,27 +13,55 @@
                 </div>
 
                 <div class="row">
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-6">
                         <%= model_class.human_attribute_name(:name_display) -%>: 
                         <input class="string optional form-control" value="<%= @product.name_display %>" readonly disabled>
                     </div>
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-6">
                         <%= model_class.human_attribute_name(:manufacturer) -%>: 
                         <input class="string optional form-control" value="<%= @product.manufacturer %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-8">
+                        <%= model_class.human_attribute_name(:name_internal) -%>: 
+                        <input class="string optional form-control" value="<%= @product.name_internal %>" readonly disabled>
                     </div>
                     <div class="mb-3 col-4">
                         <%= model_class.human_attribute_name(:active) -%>: 
                         <input class="string optional form-control" value="<%= @product&.active==true ? 'Sim' : 'Não' %>" readonly disabled>
                     </div>
                     <div class="mb-3 col-12">
-                        <%= model_class.human_attribute_name(:name_internal) -%>: 
-                        <input class="string optional form-control" value="<%= @product.name_internal %>" readonly disabled>
-                    </div>
-                    <div class="mb-3 col-12">
                         <%= model_class.human_attribute_name(:description) -%>: 
                         <input class="string optional form-control" value="<%= @product.description %>" readonly disabled>
                     </div>
                 </div>
+                <% @product.skus.each_with_index do |sku, index| %>
+                <%= model_class.human_attribute_name(:skus) -%>:
+                <div class="row">
+                    <div class="mb-3 col-8">
+                        <%= model_class.human_attribute_name(:name) -%>: 
+                        <input class="string optional form-control" value="<%= sku.name %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:code) -%>: 
+                        <input class="string optional form-control" value="<%= sku.code %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:stock) -%>: 
+                        <input class="string optional form-control" value="<%= sku.stock %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:price_table) -%>: 
+                        <input class="string optional form-control" value="<%= sku.price_table %>" readonly disabled>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <%= model_class.human_attribute_name(:price_listing) -%>: 
+                        <input class="string optional form-control" value="<%= sku.price_listing %>" readonly disabled>
+                    </div>
+                </div>
+                <% if index < @product.skus.size - 1  %>
+                <hr>
+                <% end %>
+                <% end %>
             </div>
         </div>
     </div>
