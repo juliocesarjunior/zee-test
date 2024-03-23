@@ -8,4 +8,6 @@ import "./libs/admin/app.min";
 import SimpleBar from 'simplebar';
 import '@fortawesome/fontawesome-free/js/all';
 
-$("#product_skus_attributes_0_price_table, #product_skus_attributes_0_price_listing").mask('#.##0,00', {reverse: true, placeholder: '0,00'});
+$(document).on('cocoon:after-insert', function(e, insertedItem) {
+  insertedItem.find('#price_table_sku, #price_listing_sku').mask('#.##0,00', { reverse: true, placeholder: '0,00' });
+});

@@ -1,0 +1,35 @@
+<%- model_class = Product -%>
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<span data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed" style="cursor: pointer;">
+				<h5 class="card-title mb-3">Buscar</h5>
+			</span>
+			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+				<%= search_form_for @q, url: url_search, html: { class: ''} do |f| %>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<div class="form-group">
+							<%= f.text_field :name_display_or_description_cont, class: "form-control input-lg", placeholder: 'Nome ou Descrição' %>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<div class="form-group">
+							<%= f.text_field :skus_code_cont, class: "form-control input-lg", placeholder: 'Código' %>
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<%= f.button class: "btn btn-primary", data: { disable_with: "loader Buscando..." } do %>
+						Buscar
+						<% end %>
+						<%= link_to url_search, class: 'btn btn-warning m-2 button_link' do %>
+						Limpar
+						<% end %>
+					</div>
+				</div>
+				<% end -%>
+			</div>
+		</div>
+	</div>
+</div>

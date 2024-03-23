@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 	after_save :create_slug
-	after_initialize :build_default_archive
+	after_initialize :build_default_sku
 
 	has_many :skus
 	accepts_nested_attributes_for :skus, allow_destroy: true
@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 	enum status: { active: 0, inactive: 1, deleted: 2 }, _default: :active
 
 	private
-	def build_default_archive
+	def build_default_sku
 		skus.build if skus.empty?
 	end
 	def create_slug

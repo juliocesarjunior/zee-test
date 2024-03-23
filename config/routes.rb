@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  #DEVISE
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
@@ -7,12 +8,16 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
+  #ADMIN
   namespace :admin do
     resources :skus
     resources :products
     resources :users
-
     root 'dashboard#index', as: :authenticated_root
   end
-    root to: 'admin/dashboard#index'
+
+  #API
+  resources :products, controller: 'api/v1/products', as: 'produtos', path: '/produtos'
+
+  root to: 'admin/dashboard#index'
 end
