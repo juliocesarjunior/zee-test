@@ -20,4 +20,14 @@ Rails.application.routes.draw do
   resources :products, controller: 'api/v1/products', as: 'produtos', path: '/produtos'
 
   root to: 'admin/dashboard#index'
+  
+  namespace :api do
+    namespace :v1 do
+      resources :auth, only: [] do
+        collection do
+          post '/authenticate' => 'auth#authenticate'
+        end
+      end
+    end
+  end
 end

@@ -1,5 +1,5 @@
 class Api::V1::ProductsController <  ApiController
-	#before_action :authorization_request, except: [:create]
+	before_action :authorization_request, except: [:index, :show]
 
 	before_action :set_product, only: [:show, :update, :destroy]
 

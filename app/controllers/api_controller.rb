@@ -1,5 +1,5 @@
 class ApiController < ActionController::API
-    #before_action :authorization_request
+    before_action :authorization_request
 
     def pagination_dict(collection)
         {

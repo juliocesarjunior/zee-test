@@ -3,25 +3,25 @@ class Authorization
     	@token = request.headers[:Authorization]
   	end
 
-  	def current_client
-    	@current_client ||= fetch_current_client if @token.present?
+  	def current_user
+    	@current_user ||= fetch_current_user if @token.present?
 	rescue StandardError => e
-    	Rails.logger.error("Search Client Error: #{e.message}")
+    	Rails.logger.error("Search user Error: #{e.message}")
     	nil
   	end
 
   	private
 
-  	def fetch_current_client
+  	def fetch_current_user
 
   		decodeToken = JsonWebToken.decode(@token)
 
-  		client_id = decodeToken[:client_id]
+  		user_id = decodeToken[:user_id]
 
-  		client = Client.includes(:profile).find_by(id: client_id, status: 0)
+  		user = User.find_by(id: user_id, status: 0)
     	
-    	client = client if client && decodeToken[:expires_in].to_i > Time.now.to_i 
+    	user = user if user && decodeToken[:expires_in].to_i > Time.now.to_i 
     	
-    	client
+    	user
   	end
 end

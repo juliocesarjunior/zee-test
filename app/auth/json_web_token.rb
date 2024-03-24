@@ -2,7 +2,6 @@ class JsonWebToken
 
     JWT_SECRET = ENV['JWT_SECRET'] || Rails.application.secrets.secret_key_base
 
-    #payload = {client_id: 1, expires_in: '2024-02-18 08:25'}
     def self.encode payload
         JWT.encode payload, JWT_SECRET
     rescue StandardError => e

@@ -1,28 +1,28 @@
 class Authentication
 
-    attr_reader :client
+    attr_reader :user
     
-    def initialize(client_params, request)
-        @client_params = client_params
-        @client = self.find_client
+    def initialize(user_params, request)
+        @user_params = user_params
+        @user = self.find_user
     end
 
     def authenticate
-        valid_client_password?
+        valid_user_password?
     end
 
     def generate_token
-        JsonWebToken.encode({ client_id: @client.id, email: @client.email, expires_in: expiration_time })
+        JsonWebToken.encode({ user_id: @user.id, email: @user.email, expires_in: expiration_time })
     end
 
     private
 
-    def valid_client_password?
-        @client&.valid_password?(@client_params[:password])
+    def valid_user_password?
+        @user&.valid_password?(@user_params[:password])
     end
 
-    def find_client
-        Client.find_by(email: @client_params[:email], status: 0)
+    def find_user
+        User.find_by(email: @user_params[:email], status: 0)
     end
 
     def expiration_time
