@@ -1,11 +1,24 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id            :bigint           not null, primary key
+#  active        :boolean          default(FALSE)
+#  description   :text
+#  manufacturer  :string
+#  name_display  :string
+#  name_internal :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
 class Product < ApplicationRecord
 	after_save :create_slug
 	after_initialize :build_default_sku
 
 	has_many :skus
 	accepts_nested_attributes_for :skus, allow_destroy: true
-
-	enum status: { active: 0, inactive: 1, deleted: 2 }, _default: :active
+	
+	validates :name_display, presence: true
 
 	private
 	def build_default_sku

@@ -20,13 +20,14 @@
 #
 #  fk_rails_...  (product_id => products.id)
 #
+FactoryBot.define do
+  factory :sku do
+    name { Faker::Vehicle.version }
+    code { Faker::Number.number(digits: 12) }
+    price_listing { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
+    price_table { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
+    stock { Faker::Number.between(from: 1, to: 100) }
+    association :product
+  end
+end
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value

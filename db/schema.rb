@@ -15,7 +15,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_160009) do
   enable_extension "plpgsql"
 
   create_table "products", force: :cascade do |t|
-    t.integer "status", default: 0
     t.string "name_internal"
     t.string "name_display"
     t.text "description"
