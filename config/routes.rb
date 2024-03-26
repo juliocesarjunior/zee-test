@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :auth, only: [] do
         collection do
           post '/authenticate' => 'auth#authenticate'
+          delete '/logout', to: 'auth#logout' # Usando DELETE para logout, é uma prática comum
         end
       end
     end
