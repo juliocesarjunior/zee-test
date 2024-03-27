@@ -23,20 +23,39 @@
 require 'rails_helper'
 
 RSpec.describe Sku, type: :model do
-  context 'Creation' do
-    it "creates a sku" do
-      expect { create(:sku) }.to change(Sku, :count).by(1)
+  let(:sku) { FactoryBot.build(:sku) }
+
+  context 'Should validate' do
+    it 'with name, sku type and size present' do
+      expect(sku).to be_valid
     end
 
-    it "does not create sku without required attributes" do
-      expect { create(:sku, name: '') }.to raise_error(ActiveRecord::RecordInvalid)
+    it 'when product is not present' do
+      sku.product_id = nil
+      expect(sku).to be_valid
     end
   end
 
-  context 'Validates' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:price_listing) }
-    it { is_expected.to validate_presence_of(:price_table) }
-    it { is_expected.to validate_presence_of(:stock) }
+  context 'Should not be valid' do
+    it 'when name is not present' do
+      sku.name = nil
+      expect(sku).not_to be_valid
+    end
+
+    it 'when price listing is not present' do
+      sku.price_listing = nil
+      expect(sku).not_to be_valid
+    end
+
+    it 'when price table is not present' do
+      sku.price_table = nil
+      expect(sku).not_to be_valid
+    end
+
+    it 'when stock is not present' do
+      sku.stock = nil
+      expect(sku).not_to be_valid
+    end
   end
+
 end
