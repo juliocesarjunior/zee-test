@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
 
   #DEVISE
   devise_for :users, controllers: {
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
       resources :auth, only: [] do
         collection do
           post '/authenticate' => 'auth#authenticate'
-          delete '/logout', to: 'auth#logout' # Usando DELETE para logout, é uma prática comum
+          delete '/logout', to: 'auth#logout'
         end
       end
     end
