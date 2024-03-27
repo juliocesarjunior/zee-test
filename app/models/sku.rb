@@ -24,11 +24,9 @@ class Sku < ApplicationRecord
 	belongs_to :product
 	before_create :generate_ean13
 
-	validates :name, presence: true
+	validates :name, :price_table, :price_listing, presence: true
 	validates :code, uniqueness: true
 	validates :stock, presence: true, numericality: { greater_than_or_equal_to: 0 }
-	validates :price_table, presence: true
-	validates :price_listing, presence: true
 	
 	private
 

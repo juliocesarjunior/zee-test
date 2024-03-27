@@ -13,7 +13,7 @@
 #
 class Product < ApplicationRecord
 	after_save :create_slug
-	after_initialize :build_default_sku
+	#after_initialize :build_default_sku
 
 	has_many :skus
 	accepts_nested_attributes_for :skus, allow_destroy: true

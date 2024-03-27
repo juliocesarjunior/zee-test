@@ -19,10 +19,16 @@ FactoryBot.define do
     manufacturer { Faker::Vehicle.manufacture }
     active { Faker::Boolean.boolean }
 
-    # Adicionando a criação do SKU associado ao Product
-    after(:create) do |product|
-      create(:sku, product: product)
+    factory :product_with_sku do
+      transient do
+        sku_count { 1 }
+      end
+
+      after(:create) do |product, evaluator|
+        create_list(:sku, evaluator.sku_count, product: product)
+      end
     end
+    
   end
 end
 
