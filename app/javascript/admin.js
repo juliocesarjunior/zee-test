@@ -11,3 +11,7 @@ import '@fortawesome/fontawesome-free/js/all';
 $(document).on('cocoon:after-insert', function(e, insertedItem) {
   insertedItem.find('#price_table_sku, #price_listing_sku').mask('#.##0,00', { reverse: true, placeholder: '0,00' });
 });
+
+$(document).ready(function() {
+  $('#price_table_sku, #price_listing_sku').mask('#.##0,00', { reverse: true, placeholder: '0,00' });
+});
