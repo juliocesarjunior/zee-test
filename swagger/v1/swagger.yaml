@@ -31,11 +31,11 @@ paths:
                 example_0:
                   value:
                     message: Login efetuado com sucesso!
-                    token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImV4cGlyZXNfaW4iOjE3MTY3MzUwMjd9.2hkpiKetoXcMPN10g2w24GT8DbzHThAhlx07qy9LXug
+                    token: token
                     user:
-                      id: 1
-                      email: admin@admin.com
-                      name: admin
+                      id: 
+                      email: email
+                      name: nome
                       status: active
                       created_at: '2024-01-21T10:40:41.687-03:00'
                       updated_at: '2024-01-21T10:40:41.687-03:00'
@@ -43,19 +43,14 @@ paths:
     get:
       summary: list products
       parameters:
-      - name: page
-        in: query
-        description: Page number
-        schema:
-          type: integer
-      - name: per_page
-        in: query
-        description: Items per page
-        schema:
-          type: integer
-      - name: q[name_or_description_cont]
+      - name: q[name_display_or_description_cont]
         in: query
         description: Busca por Produtos (nome ou descrição)
+        schema:
+          type: string
+      - name: q[skus_code_cont]
+        in: query
+        description: Busca por Código(SKUs)
         schema:
           type: string
       tags:
@@ -65,42 +60,6 @@ paths:
       responses:
         '200':
           description: successful
-          content:
-            application/json:
-              examples:
-                example_0:
-                  value:
-                    products:
-                    - id: 1
-                      name_display: Dodge Charger
-                      description: Carro
-                      manufacturer: Lamborghini
-                      active: true
-                      skus:
-                      - name: Altis Hybrid 1.8 16V CVT
-                        stock: 5
-                        price_table: 250.000,00
-                        price_listing: 260.000,00
-                      created_at: '2024-01-18T13:58:28.282-03:00'
-                      updated_at: '2024-01-18T13:58:28.282-03:00'
-                    - id: 2
-                      name_display: Super Mario
-                      description: Jogo
-                      manufacturer: Nintendo
-                      active: true
-                      skus:
-                      - name: Altis Hybrid 1.8 16V CVT
-                        stock: 5
-                        price_table: 250.000,00
-                        price_listing: 260.000,00
-                      created_at: '2024-01-18T13:58:28.282-03:00'
-                      updated_at: '2024-01-18T13:58:28.282-03:00'
-                    meta:
-                      current_page: 1
-                      next_page: 2
-                      prev_page: 
-                      total_pages: 2
-                      total_count: 20
     post:
       summary: create products
       tags:
@@ -116,64 +75,63 @@ paths:
               examples:
                 example_0:
                   value:
-                    products:
-                      id: 1
-                      name_display: Dodge Charger
-                      description: Carro
-                      manufacturer: Lamborghini
-                      active: true
-                      skus:
-                      - name: Altis Hybrid 1.8 16V CVT
-                        stock: 5
-                        price_table: 250.000,00
-                        price_listing: 260.000,00
-                      created_at: '2024-01-18T13:58:28.282-03:00'
-                      updated_at: '2024-01-18T13:58:28.282-03:00'
+                    id: 
+                    name_display: Dodge Charger
+                    description: Carro
+                    manufacturer: Lamborghini
+                    active: true
+                    skus_attributes:
+                    - id: 
+                      name: Altis Hybrid 1.8 16V CVT
+                      stock: 5
+                      price_table: 250.000,00
+                      price_listing: 260.000,00
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                product:
-                  type: object
-                  properties:
-                    name_display:
-                      type: string
-                      default: Produto 1
-                    description:
-                      type: string
-                      default: Descrição 1
-                    manufacturer:
-                      type: string
-                      default: Livro
-                    active:
-                      type: boolean
-                      default: false
-                    skus:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            default: Sku 1
-                          stock:
-                            type: integer
-                            default: 10
-                          price_table:
-                            type: string
-                            default: '10,00'
-                          price_listing:
-                            type: string
-                            default: '9,00'
-                        required:
-                        - name
-                        - stock
-                        - price_table
-                        - price_listing
-                  required:
-                  - name_display
+                name_display:
+                  type: string
+                  default: Dodge Charger
+                description:
+                  type: string
+                  default: Carro
+                manufacturer:
+                  type: string
+                  default: Lamborghini
+                active:
+                  type: boolean
+                  default: true
+                skus_attributes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        default: Altis Hybrid 1.8 16V CVT
+                      stock:
+                        type: integer
+                        default: 5
+                      price_table:
+                        type: string
+                        default: 250.000,00
+                      price_listing:
+                        type: string
+                        default: 260.000,00
+                    required:
+                    - name
+                    - stock
+                    - price_table
+                    - price_listing
+              required:
+              - name_display
+              - description
+              - manufacturer
+              - active
+              - skus_attributes
   "/produtos/{id}":
     parameters:
     - name: id
@@ -196,19 +154,17 @@ paths:
               examples:
                 example_0:
                   value:
-                    products:
-                      id: 1
-                      name_display: Dodge Charger
-                      description: Carro
-                      manufacturer: Lamborghini
-                      active: true
-                      skus:
-                      - name: Altis Hybrid 1.8 16V CVT
-                        stock: 5
-                        price_table: 250.000,00
-                        price_listing: 260.000,00
-                      created_at: '2024-01-18T13:58:28.282-03:00'
-                      updated_at: '2024-01-18T13:58:28.282-03:00'
+                    id: 
+                    name_display: Dodge Charger
+                    description: Carro
+                    manufacturer: Lamborghini
+                    active: true
+                    skus_attributes:
+                    - id: 
+                      name: Altis Hybrid 1.8 16V CVT
+                      stock: 5
+                      price_table: 250.000,00
+                      price_listing: 260.000,00
     put:
       summary: update products
       tags:
@@ -230,64 +186,70 @@ paths:
               examples:
                 example_0:
                   value:
-                    products:
-                      id: 1
-                      name_display: Dodge Charger
-                      description: Carro
-                      manufacturer: Lamborghini
-                      active: true
-                      skus:
-                      - name: Altis Hybrid 1.8 16V CVT
-                        stock: 5
-                        price_table: 250.000,00
-                        price_listing: 260.000,00
-                      created_at: '2024-01-18T13:58:28.282-03:00'
-                      updated_at: '2024-01-18T13:58:28.282-03:00'
+                    id: 
+                    name_display: Super Mario
+                    description: Jogos eletrônicos
+                    manufacturer: Nintendo
+                    active: false
+                    skus_attributes:
+                    - id: 
+                      name: Super Nintendo
+                      stock: 1
+                      price_table: '100,00'
+                      price_listing: '200,00'
+                    created_at: '2024-01-18T13:58:28.282-03:00'
+                    updated_at: '2024-01-18T13:58:28.282-03:00'
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                product:
-                  type: object
-                  properties:
-                    name_display:
-                      type: string
-                      default: Produto 1
-                    description:
-                      type: string
-                      default: Descrição 1
-                    manufacturer:
-                      type: string
-                      default: Livro
-                    active:
-                      type: boolean
-                      default: false
-                    skus:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            default: Sku 1
-                          stock:
-                            type: integer
-                            default: 10
-                          price_table:
-                            type: string
-                            default: '10,00'
-                          price_listing:
-                            type: string
-                            default: '9,00'
-                        required:
-                        - name
-                        - stock
-                        - price_table
-                        - price_listing
-                  required:
-                  - name_display
+                name_internal:
+                  type: string
+                  default: super-mario
+                name_display:
+                  type: string
+                  default: Super Mario
+                description:
+                  type: string
+                  default: Jogos eletrônicos
+                manufacturer:
+                  type: string
+                  default: Nintendo
+                active:
+                  type: boolean
+                  default: false
+                skus_attributes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                        default: Super Nintendo
+                      stock:
+                        type: integer
+                        default: 1
+                      price_table:
+                        type: string
+                        default: '100,00'
+                      price_listing:
+                        type: string
+                        default: '200,00'
+                    required:
+                    - name
+                    - stock
+                    - price_table
+                    - price_listing
+              required:
+              - name_display
+              - description
+              - manufacturer
+              - active
+              - skus_attributes
     delete:
       summary: delete products
       tags:

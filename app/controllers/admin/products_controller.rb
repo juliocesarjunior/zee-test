@@ -15,6 +15,8 @@ class Admin::ProductsController < AdminController
   # GET /admin/products/new
   def new
     @product = Product.new
+    @product.skus << Sku.new
+
   end
 
   # GET /admin/products/1/edit
@@ -24,6 +26,10 @@ class Admin::ProductsController < AdminController
   # POST /admin/products or /admin/products.json
   def create
     @product = Product.new(product_params)
+
+    if @product.skus.size==0
+      @product.skus << Sku.new
+    end
 
     respond_to do |format|
       if @product.save

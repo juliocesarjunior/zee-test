@@ -3,7 +3,7 @@
 	<td>
 		<%= product&.name_display%>
 	</td>
-	<td><%= product&.description %></td>
+	<td><%= product&.description rescue '---' %></td>
 	<td><%= product&.manufacturer %></td>
 	<td><%= product&.active==true ? 'Sim' : 'Não' %></td>
 	<td><%=l product.created_at %></td>

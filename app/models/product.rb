@@ -12,7 +12,8 @@
 #  updated_at    :datetime         not null
 #
 class Product < ApplicationRecord
-	after_save :create_slug
+	before_save :update_name_internal, if: :name_display_changed?
+
 	#after_initialize :build_default_sku
 
 	has_many :skus
@@ -21,13 +22,16 @@ class Product < ApplicationRecord
 	validates :name_display, presence: true
 
 	private
+
 	def build_default_sku
 		skus.build if skus.empty?
 	end
-	def create_slug
-		if self.name_internal.blank? or self.name_internal.nil?
-			self.name_internal = ("#{self.name_display rescue '-'}-#{self.id.to_s rescue '-'}").parameterize
-			self.save
-		end
+
+	def update_name_internal
+		self.name_internal = generate_slug(name_display)
+	end
+
+	def generate_slug(name)
+		name.parameterize
 	end
 end
