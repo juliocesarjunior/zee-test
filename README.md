@@ -22,23 +22,30 @@ Siga os passos abaixo para configurar o sistema no seu computador.
 Agora com tudo configurado, basta executa `rails s`
 
 ## API
+Para acessar a API, você pode utilizar programas como o Postman, Restfox, Insomnia, entre outros.
+
 ### Autenticação:
+Endpoint para autenticação:
 POST `/api/v1/auth/authenticate`
 
+Exemplo do corpo da solicitação:
 ```bash
 {
   "email": "admin@admin.com",
   "password": "1234567890"
 }
 ```
-copia token `token` adiciona em `Authorization -> Bearer Token`
+Após receber o token, adicione-o em `Authorization`  -> `Bearer Token`
 
-### Produtos:
+### GET Produtos:
+Obter todos os produtos:
 GET `/produtos`
 
-### Produtos:
+### POST Produtos:
+Criar um novo produto:
 POST `/produtos`
 
+Exemplo do corpo da solicitação para criar um produto:
 ```bash
 {
   "name_display": "Dodge Charger",
@@ -56,12 +63,15 @@ POST `/produtos`
 }
 ```
 
-### Produto por ID:
+### GET Produto ID:
+Obter um produto específico por ID:
 GET `/produtos/{id}`
 
-### Produtos:
+### PACHT Produtos ID:
+Atualizar um produto por ID:
 PACHT `/produtos/{id}`
 
+Exemplo do corpo da solicitação para atualizar um produto:
 ```bash
 {
     "name_internal": "super-mario",
@@ -82,5 +92,24 @@ PACHT `/produtos/{id}`
   }
 ```
 
-### DELETA Produto por ID:
+### DELETA Produto  ID:
+Deletar um produto por ID:
 DELETE `/produtos/{id}`
+
+
+## Documentação Swagger
+Para acessar a documentação Swagger da API, siga os passos abaixo:
+```bash
+	http://localhost:3000/api-doc
+```
+
+## Testes com RSpec
+Para executar os testes automatizados nos modelos, utilize o seguinte comando:
+```bash
+	bundle exec rspec spec/models
+```
+Apenas Testes RSpec nos Modelos:
+1. Usuarios
+2. Produtos
+3. SKUs
+
