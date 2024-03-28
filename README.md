@@ -21,7 +21,15 @@ Siga os passos abaixo para configurar o sistema no seu computador.
 # Iniciando o projeto
 Agora com tudo configurado, basta executa `rails s`
 
-## API
+## Acesso via interface visual
+Para acessar a interface visual do projeto, abra seu navegador e digite o seguinte endereço na barra de URL:
+`http://localhost:3000`
+ou utilize o host inicializado se estiver configurado para outro endereço.
+
+Email: `admin@admin.com`
+Senha: `1234567890`
+
+## Acesso via API
 Para acessar a API, você pode utilizar programas como o Postman, Restfox, Insomnia, entre outros.
 
 ### Autenticação:
